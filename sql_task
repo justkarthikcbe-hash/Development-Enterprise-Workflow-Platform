@@ -1,0 +1,151 @@
+
+-- ==========================================
+-- 30 BASIC SQL QUERIES
+-- B.Tech Information Technology
+-- SQL Beginner Practice Repository
+-- ==========================================
+
+-- 1. Create Database
+CREATE DATABASE CollegeDB;
+
+-- 2. Select Database
+USE CollegeDB;
+
+-- 3. Create Student Table
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT,
+    department VARCHAR(30),
+    marks INT
+);
+
+-- 4. Insert Single Student
+INSERT INTO Students
+VALUES (1, 'Arun', 19, 'IT', 85);
+
+-- 5. Insert Multiple Students
+INSERT INTO Students VALUES
+(2, 'Kumar', 20, 'CSE', 90),
+(3, 'Priya', 19, 'IT', 88),
+(4, 'Divya', 21, 'ECE', 75),
+(5, 'Rahul', 20, 'IT', 95);
+
+-- 6. Display All Students
+SELECT * FROM Students;
+
+-- 7. Display Student Names
+SELECT name FROM Students;
+
+-- 8. Find Students Above Age 19
+SELECT * FROM Students
+WHERE age > 19;
+
+-- 9. Find IT Department Students
+SELECT * FROM Students
+WHERE department = 'IT';
+
+-- 10. Find Students with Marks Above 80
+SELECT * FROM Students
+WHERE marks > 80;
+
+-- 11. Sort Students by Marks (Ascending)
+SELECT * FROM Students
+ORDER BY marks ASC;
+
+-- 12. Sort Students by Marks (Descending)
+SELECT * FROM Students
+ORDER BY marks DESC;
+
+-- 13. Count Total Students
+SELECT COUNT(*) AS Total_Students
+FROM Students;
+
+-- 14. Find Average Marks
+SELECT AVG(marks) AS Average_Marks
+FROM Students;
+
+-- 15. Find Highest Marks
+SELECT MAX(marks) AS Highest_Marks
+FROM Students;
+
+-- 16. Find Lowest Marks
+SELECT MIN(marks) AS Lowest_Marks
+FROM Students;
+
+-- 17. Find Total Marks
+SELECT SUM(marks) AS Total_Marks
+FROM Students;
+
+-- 18. Update Student Marks
+UPDATE Students
+SET marks = 92
+WHERE student_id = 1;
+
+-- 19. Update Student Department
+UPDATE Students
+SET department = 'CSE'
+WHERE student_id = 3;
+
+-- 20. Delete a Student
+DELETE FROM Students
+WHERE student_id = 5;
+
+-- 21. Find Students Between Ages 19 and 21
+SELECT * FROM Students
+WHERE age BETWEEN 19 AND 21;
+
+-- 22. Find Students Using IN
+SELECT * FROM Students
+WHERE department IN ('IT', 'CSE');
+
+-- 23. Search Names Using LIKE
+SELECT * FROM Students
+WHERE name LIKE 'A%';
+
+-- 24. Find Unique Departments
+SELECT DISTINCT department
+FROM Students;
+
+-- 25. Group Students by Department
+SELECT department, COUNT(*) AS Total
+FROM Students
+GROUP BY department;
+
+-- 26. Find Departments with Average Marks Above 80
+SELECT department, AVG(marks) AS Average_Marks
+FROM Students
+GROUP BY department
+HAVING AVG(marks) > 80;
+
+-- 27. Add Email Column
+ALTER TABLE Students
+ADD email VARCHAR(100);
+
+-- 28. Create Courses Table
+CREATE TABLE Courses (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(50),
+    student_id INT,
+    FOREIGN KEY (student_id)
+    REFERENCES Students(student_id)
+);
+
+-- 29. Insert Course Details
+INSERT INTO Courses VALUES
+(101, 'Python Programming', 1),
+(102, 'Database Management', 2),
+(103, 'Java Programming', 3);
+
+-- 30. Join Students and Courses
+SELECT
+    Students.name,
+    Students.department,
+    Courses.course_name
+FROM Students
+INNER JOIN Courses
+ON Students.student_id = Courses.student_id;
+
+-- ==========================================
+-- END OF 30 BASIC SQL QUERIES
+-- ==========================================
